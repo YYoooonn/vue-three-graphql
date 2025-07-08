@@ -7,4 +7,7 @@ import { dirname, join } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-export const schema = readFileSync(join(__dirname, '../../../packages/graphql/schema.graphql'), 'utf-8')
+export const schema = readFileSync(
+  join(__dirname, '../../../packages/graphql/schema.graphql'),
+  'utf-8',
+)

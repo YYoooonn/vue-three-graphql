@@ -5,7 +5,6 @@ import { resolvers } from './resolvers/mesh.js'
 import { makeExecutableSchema } from '@graphql-tools/schema'
 
 export async function startServer() {
-
   const executableSchema = makeExecutableSchema({
     typeDefs: schema,
     resolvers,
@@ -26,7 +25,6 @@ export async function startServer() {
       },
     ],
   })
-
 
   // Start the server
   const { url } = await startStandaloneServer(server, {

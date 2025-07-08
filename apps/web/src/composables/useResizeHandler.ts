@@ -3,7 +3,7 @@ import * as THREE from 'three'
 export function useResizeHandler(
   container: HTMLElement,
   camera: THREE.PerspectiveCamera,
-  renderer: THREE.WebGLRenderer
+  renderer: THREE.WebGLRenderer,
 ) {
   const onResize = () => {
     const width = container.clientWidth
