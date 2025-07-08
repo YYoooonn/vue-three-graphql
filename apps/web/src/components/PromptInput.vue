@@ -14,17 +14,26 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-const prompt = ref('')
+import { useGenerateMesh } from '@/graphql/hooks/useGenerateMesh'
 
-const emit = defineEmits<{
-  (e: 'submit', prompt: string): void
-}>()
+const prompt = ref('')
+const { mutate, onDone, onError } = useGenerateMesh()
+
+onDone(({ data }) => {
+  if (data?.generateMesh) {
+    console.log('Generated Mesh:', data.generateMesh)
+    // emit('mesh-generated', data.generateMesh)
+  }
+})
+
+onError((err) => {
+  console.error('GraphQL Error:', err)
+})
 
 function handleSubmit() {
-  if (prompt.value.trim()) {
-    emit('submit', prompt.value.trim())
-    prompt.value = ''
-  }
+  if (!prompt.value) return
+
+  mutate({ prompt: prompt.value })
 }
 </script>
 

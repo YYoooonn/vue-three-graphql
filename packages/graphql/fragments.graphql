@@ -1,0 +1,6 @@
+fragment MeshCommandFields on MeshCommand {
+  id
+  type
+  color
+  position
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@packages/graphql",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./client": {
+      "types": "./generated/client/graphql.ts",
+      "default": "./generated/client/graphql.ts"
+    },
+    "./server": {
+      "types": "./generated/server/resolvers-types.ts",
+      "default": "./generated/server/resolvers-types.ts"
+    }
+  },
+  "scripts": {
+    "codegen": "pnpm codegen:client && pnpm codegen:server",
+    "codegen:client": "graphql-codegen --config codegen.client.ts",
+    "codegen:server": "graphql-codegen --config codegen.server.ts"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/client-preset": "^4.8.3",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-operations": "^4.6.1",
+    "@graphql-codegen/typescript-resolvers": "^4.5.1",
+    "graphql": "^16.11.0"
+  },
+  "files": [
+    "generated"
+  ]
+}

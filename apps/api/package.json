@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.12.2",
+    "@graphql-tools/schema": "^10.0.23",
+    "@packages/graphql": "workspace:^",
+    "graphql": "^16.11.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.3",
+    "typescript": "~5.8.3"
+  }
+}

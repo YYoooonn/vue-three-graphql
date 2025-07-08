@@ -1,0 +1,14 @@
+type Query {
+  _empty: String
+}
+
+type MeshCommand {
+  id: ID!
+  type: String!
+  color: String
+  position: [Float!]!
+}
+
+type Mutation {
+  generateMesh(prompt: String!): MeshCommand!
+}
