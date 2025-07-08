@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@layer base {
+  html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+}
+
+@theme {
+  --color-background: #f2f2f2;
+}

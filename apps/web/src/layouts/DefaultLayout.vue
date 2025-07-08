@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-50 text-gray-800">
+  <div class="flex flex-col min-h-screen bg-background text-gray-800">
     <Navbar />
-    <main class="flex-1 p-6">
+    <main class="relative flex-1 p-6 overflow-y-auto">
       <slot />
     </main>
     <Footer />

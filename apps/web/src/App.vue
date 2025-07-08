@@ -1,6 +1,4 @@
 <script setup lang="ts">
-/* import components */
-// import HelloWorld from './components/HelloWorld.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 </script>
 
@@ -10,8 +8,12 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
   </DefaultLayout>
 </template>
 
-<!-- 
+
 <style scoped>
-/* tailwindcss styles */
+/* div {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+} */
 </style> 
--->
+

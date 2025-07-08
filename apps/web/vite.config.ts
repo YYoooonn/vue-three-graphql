@@ -1,13 +1,29 @@
 import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    tailwindcss()
+  ],
   resolve: {
     alias: {
-      '@': '/src',
-      '@public': '/public',
+      '@': path.resolve(__dirname, './src'),
     },
+  },
+  css: {
+    preprocessorOptions: {
+      // 만약 SCSS나 LESS 사용 시 여기에 global import 설정 가능
+      // scss: {
+      //   additionalData: `@import "@/assets/styles/variables.scss";`
+      // }
+    },
+  },
+  server: {
+    port: 5173,
+    open: true,
   },
 })

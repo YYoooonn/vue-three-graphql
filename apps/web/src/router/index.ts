@@ -9,6 +9,10 @@ const routes = [
     path: '/about',
     component: () => import('@/pages/AboutPage.vue'),
   },
+  {
+    path: '/test',
+    component: () => import('@/pages/TestPage.vue'),
+  },
 ]
 
 const router = createRouter({
