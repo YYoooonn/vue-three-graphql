@@ -4,8 +4,8 @@
   "type": "module",
   "exports": {
     "./client": {
-      "types": "./generated/client/graphql.ts",
-      "default": "./generated/client/graphql.ts"
+      "types": "./generated/client/index.ts",
+      "default": "./generated/client/index.ts"
     },
     "./server": {
       "types": "./generated/server/resolvers-types.ts",
@@ -23,7 +23,10 @@
     "@graphql-codegen/typescript": "^4.1.6",
     "@graphql-codegen/typescript-operations": "^4.6.1",
     "@graphql-codegen/typescript-resolvers": "^4.5.1",
-    "graphql": "^16.11.0"
+    "@graphql-codegen/typescript-vue-apollo": "^4.1.2",
+    "graphql": "^16.11.0",
+    "graphql-tag": "^2.12.6",
+    "prettier": "^3.6.2"
   },
   "files": [
     "generated"

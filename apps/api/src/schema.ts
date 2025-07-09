@@ -1,4 +1,3 @@
-// 파일: apps/api/src/schema.ts
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'

@@ -3,7 +3,7 @@
     <div class="glass-input p-4 rounded-2xl shadow-lg backdrop-blur-md border border-white/20">
       <input
         v-model="prompt"
-        @keydown.enter="handleSubmit"
+        @keypress.enter="handleSubmit"
         type="text"
         placeholder="Describe your 3D object..."
         class="bg-transparent w-full text-gray-500 placeholder-gray-300 outline-none text-sm"
@@ -15,14 +15,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useGenerateMesh } from '@/graphql/hooks/useGenerateMesh'
+import { useMeshStore } from '@/stores/useMeshStore'
 
 const prompt = ref('')
 const { mutate, onDone, onError } = useGenerateMesh()
+const meshStore = useMeshStore()
 
 onDone(({ data }) => {
   if (data?.generateMesh) {
     console.log('Generated Mesh:', data.generateMesh)
-    // emit('mesh-generated', data.generateMesh)
+    meshStore.addMesh(data.generateMesh)
   }
 })
 
@@ -33,6 +35,7 @@ onError((err) => {
 function handleSubmit() {
   if (!prompt.value) return
 
+  meshStore.clearMeshes()
   mutate({ prompt: prompt.value })
 }
 </script>

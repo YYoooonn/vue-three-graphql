@@ -1,0 +1,97 @@
+{
+  "id": "eiffel-tower",
+  "name": "Eiffel Tower",
+  "position": { "x": 0, "y": 0, "z": 0 },
+  "rotation": { "x": 0, "y": 0, "z": 0 },
+  "scale": { "x": 1, "y": 1, "z": 1 },
+  "geometry": {
+    "type": "custom",
+    "params": {},
+    "vertices": [],
+    "indices": []
+  },
+  "material": {
+    "color": "#888888",
+    "metalness": 0.5,
+    "roughness": 0.8
+  },
+  "children": [
+    {
+      "id": "base",
+      "name": "Base",
+      "position": { "x": 0, "y": 0.5, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "scale": { "x": 3, "y": 1, "z": 3 },
+      "geometry": {
+        "type": "box",
+        "params": { "width": 1, "height": 1, "depth": 1 },
+        "vertices": [],
+        "indices": []
+      },
+      "material": {
+        "color": "#444444",
+        "metalness": 0.2,
+        "roughness": 0.9
+      },
+      "children": []
+    },
+    {
+      "id": "middle",
+      "name": "Middle",
+      "position": { "x": 0, "y": 2, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "scale": { "x": 2, "y": 2, "z": 2 },
+      "geometry": {
+        "type": "box",
+        "params": { "width": 1, "height": 1, "depth": 1 },
+        "vertices": [],
+        "indices": []
+      },
+      "material": {
+        "color": "#666666",
+        "metalness": 0.3,
+        "roughness": 0.8
+      },
+      "children": [
+        {
+          "id": "middle-support",
+          "name": "Middle Support",
+          "position": { "x": 0.5, "y": 0.5, "z": 0.5 },
+          "rotation": { "x": 0.1, "y": 0.2, "z": 0 },
+          "scale": { "x": 0.2, "y": 1, "z": 0.2 },
+          "geometry": {
+            "type": "cylinder",
+            "params": { "radiusTop": 0.1, "radiusBottom": 0.1, "height": 1 },
+            "vertices": [],
+            "indices": []
+          },
+          "material": {
+            "color": "#555555",
+            "metalness": 0.2,
+            "roughness": 0.7
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "top",
+      "name": "Top",
+      "position": { "x": 0, "y": 4.5, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "scale": { "x": 1, "y": 2, "z": 1 },
+      "geometry": {
+        "type": "cone",
+        "params": { "radius": 0.5, "height": 2 },
+        "vertices": [],
+        "indices": []
+      },
+      "material": {
+        "color": "#999999",
+        "metalness": 0.4,
+        "roughness": 0.6
+      },
+      "children": []
+    }
+  ]
+}

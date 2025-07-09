@@ -2,13 +2,47 @@ type Query {
   _empty: String
 }
 
-type MeshCommand {
-  id: ID!
-  type: String!
-  color: String
-  position: [Float!]!
+type Mutation {
+  generateMesh(prompt: String!): MeshObject!
 }
 
-type Mutation {
-  generateMesh(prompt: String!): MeshCommand!
+type MeshObject {
+  id: ID!
+  name: String
+  geometry: Geometry!
+  material: Material!
+  position: Vector3
+  rotation: Vector3
+  scale: Vector3
+  children: [MeshObject!]
 }
+
+type Geometry {
+  type: GeometryType!
+  params: JSON
+  vertices: [Float!]
+  indices: [Int!]
+}
+
+type Material {
+  color: String
+  metalness: Float
+  roughness: Float
+  textureUrl: String
+}
+
+type Vector3 {
+  x: Float!
+  y: Float!
+  z: Float!
+}
+
+enum GeometryType {
+  box
+  sphere
+  cylinder
+  custom
+  cone
+}
+
+scalar JSON

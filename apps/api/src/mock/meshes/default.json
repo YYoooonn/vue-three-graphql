@@ -1,0 +1,39 @@
+{
+  "id": "default-mesh",
+  "name": "Default Mesh",
+  "position": { "x": 0, "y": 0, "z": 0 },
+  "rotation": { "x": 0, "y": 0, "z": 0 },
+  "scale": { "x": 1, "y": 1, "z": 1 },
+  "geometry": {
+    "type": "box",
+    "params": { "width": 2, "height": 2, "depth": 2 },
+    "vertices": [],
+    "indices": []
+  },
+  "material": {
+    "color": "#ffaa00",
+    "metalness": 0.2,
+    "roughness": 0.7
+  },
+  "children": [
+    {
+      "id": "default-child",
+      "name": "Inner Sphere",
+      "position": { "x": 0, "y": 1.2, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "scale": { "x": 0.5, "y": 0.5, "z": 0.5 },
+      "geometry": {
+        "type": "sphere",
+        "params": { "radius": 1 },
+        "vertices": [],
+        "indices": []
+      },
+      "material": {
+        "color": "#ffffff",
+        "metalness": 0.4,
+        "roughness": 0.4
+      },
+      "children": []
+    }
+  ]
+}

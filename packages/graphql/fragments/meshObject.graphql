@@ -1,0 +1,62 @@
+fragment MeshObjectFields on MeshObject {
+  id
+  name
+  position {
+    x
+    y
+    z
+  }
+  rotation {
+    x
+    y
+    z
+  }
+  scale {
+    x
+    y
+    z
+  }
+  geometry {
+    type
+    params
+    vertices
+    indices
+  }
+  material {
+    color
+    metalness
+    roughness
+    textureUrl
+  }
+  children {
+    id
+    name
+    position {
+      x
+      y
+      z
+    }
+    rotation {
+      x
+      y
+      z
+    }
+    scale {
+      x
+      y
+      z
+    }
+    geometry {
+      type
+      params
+      vertices
+      indices
+    }
+    material {
+      color
+      metalness
+      roughness
+      textureUrl
+    }
+  }
+}

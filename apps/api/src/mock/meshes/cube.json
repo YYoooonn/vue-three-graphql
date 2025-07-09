@@ -1,0 +1,19 @@
+{
+  "id": "simple-cube",
+  "name": "cube",
+  "position": { "x": 0, "y": 0.5, "z": 0 },
+  "rotation": { "x": 0, "y": 0, "z": 0 },
+  "scale": { "x": 1, "y": 1, "z": 1 },
+  "geometry": {
+    "type": "box",
+    "params": { "width": 1, "height": 1, "depth": 1 },
+    "vertices": [],
+    "indices": []
+  },
+  "material": {
+    "color": "#00aaff",
+    "metalness": 0.3,
+    "roughness": 0.9
+  },
+  "children": []
+}

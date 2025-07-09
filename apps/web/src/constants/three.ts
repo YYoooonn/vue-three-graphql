@@ -9,3 +9,8 @@ const SAMPLE_LINE_GEOMETRY = new THREE.BufferGeometry().setFromPoints([
 ])
 const SAMPLE_LINE_MATERIAL = new THREE.LineBasicMaterial({ color: 0x000000 })
 export const SAMPLE_LINE = new THREE.Line(SAMPLE_LINE_GEOMETRY, SAMPLE_LINE_MATERIAL)
+
+export const SAMPLE_CUBE = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshStandardMaterial({ color: 0x00aaff }),
+)

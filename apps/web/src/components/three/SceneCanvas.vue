@@ -2,43 +2,45 @@
   <div ref="container" class="absolute inset-0 w-full h-full" />
 </template>
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
-import { useRenderer } from '@/composables/useRenderer'
-import { useCamera } from '@/composables/useCamera'
-import { useControls } from '@/composables/useControls'
-import { useLights } from '@/composables/useLights'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useResizeHandler } from '@/composables/useResizeHandler'
-
-import * as THREE from 'three'
-import { SAMPLE_LINE } from '@/constants/three'
+import { useMeshStore } from '@/stores/useMeshStore'
+import { initScene, addMesh, clearScene, disponse } from '@/utils/three/sceneManager'
+import { addTestObjects } from '@/utils/three/test'
 
 const container = ref<HTMLDivElement | null>(null)
+const meshStore = useMeshStore()
 
 let animationId: number
+
+function setupMeshWatcher() {
+  watch(
+    () => meshStore.meshes,
+    (meshes) => {
+      clearScene()
+      for (const meshData of meshes) {
+        addMesh(meshData)
+      }
+    },
+    { deep: true },
+  )
+}
 
 onMounted(() => {
   if (!container.value) return
 
-  const { renderer, scene } = useRenderer(container.value)
-  const camera = useCamera(container.value)
-  const controls = useControls(camera, renderer.domElement)
-  useLights(scene)
+  const { scene, renderer, camera, controls } = initScene(container.value)
+
   const removeResizeHandler = useResizeHandler(container.value, camera, renderer)
 
-  // 임시 테스트 큐브
-  const geometry = new THREE.BoxGeometry()
-  const material = new THREE.MeshStandardMaterial({ color: 0x00aaff })
-  const cube = new THREE.Mesh(geometry, material)
-  scene.add(cube)
-
-  // 임시 테스트 path
-  scene.add(SAMPLE_LINE)
+  const { cube, sampleLine } = addTestObjects(scene)
+  setupMeshWatcher()
 
   const animate = () => {
     cube.rotation.x += 0.01
     cube.rotation.y += 0.01
 
-    SAMPLE_LINE.rotation.y -= 0.01
+    sampleLine.rotation.y -= 0.01
 
     controls.update()
     renderer.render(scene, camera)
@@ -48,9 +50,8 @@ onMounted(() => {
 
   onUnmounted(() => {
     cancelAnimationFrame(animationId)
-    controls.dispose()
-    renderer.dispose()
     removeResizeHandler()
+    disponse()
   })
 })
 </script>
