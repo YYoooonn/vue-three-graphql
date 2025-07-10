@@ -1,0 +1,109 @@
+{
+  "input": {
+    "background": "#202020",
+    "objects": [
+      {
+        "id": "group-1",
+        "name": "Root Group",
+        "type": "GROUP",
+        "position": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "scale": { "x": 1, "y": 1, "z": 1 },
+        "animations": [],
+        "count": 0,
+        "geometry": null,
+        "material": null,
+        "light": null,
+        "camera": null,
+        "children": [
+          {
+            "id": "mesh-1",
+            "name": "Box Mesh",
+            "type": "MESH",
+            "position": { "x": 0, "y": 1, "z": 0 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "scale": { "x": 1, "y": 1, "z": 1 },
+            "animations": [
+              {
+                "property": "rotation.y",
+                "from": 0,
+                "to": 6.2832,
+                "duration": 5000,
+                "repeat": -1
+              }
+            ],
+            "count": 1,
+            "geometry": {
+              "type": "BOX",
+              "params": {
+                "width": 1,
+                "height": 1,
+                "depth": 1
+              },
+              "vertices": [],
+              "indices": [],
+              "normals": [],
+              "uvs": [],
+              "colors": []
+            },
+            "material": {
+              "type": "STANDARD",
+              "color": "#00ff00",
+              "roughness": 0.5,
+              "metalness": 0.1,
+              "transparent": false,
+              "opacity": 1
+            },
+            "light": null,
+            "camera": null,
+            "children": []
+          },
+          {
+            "id": "light-1",
+            "name": "Directional Light",
+            "type": "LIGHT",
+            "position": { "x": 5, "y": 10, "z": 5 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "scale": { "x": 1, "y": 1, "z": 1 },
+            "animations": [],
+            "count": 0,
+            "geometry": null,
+            "material": null,
+            "light": {
+              "type": "DIRECTIONAL",
+              "color": "#ffffff",
+              "intensity": 1,
+              "distance": 0,
+              "angle": 0.5,
+              "target": { "x": 0, "y": 0, "z": 0 },
+              "position": { "x": 5, "y": 10, "z": 5 }
+            },
+            "camera": null,
+            "children": []
+          },
+          {
+            "id": "camera-1",
+            "name": "Main Camera",
+            "type": "CAMERA",
+            "position": { "x": 5, "y": 5, "z": 10 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "scale": { "x": 1, "y": 1, "z": 1 },
+            "animations": [],
+            "count": 0,
+            "geometry": null,
+            "material": null,
+            "light": null,
+            "camera": {
+              "type": "PERSPECTIVE",
+              "fov": 75,
+              "near": 0.1,
+              "far": 100,
+              "zoom": 1
+            },
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}

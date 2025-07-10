@@ -8,12 +8,20 @@
   },
   "dependencies": {
     "@apollo/server": "^4.12.2",
-    "@graphql-tools/schema": "^10.0.23",
     "@packages/graphql": "workspace:^",
     "graphql": "^16.11.0"
   },
   "devDependencies": {
+    "@graphql-tools/load-files": "^7.0.1",
+    "@graphql-tools/merge": "^9.0.24",
+    "@graphql-tools/schema": "^10.0.23",
+    "@graphql-tools/utils": "^10.8.6",
     "tsx": "^4.20.3",
     "typescript": "~5.8.3"
-  }
+  },
+  "files": [
+    "**/*.graphql",
+    "generated/",
+    "index.ts"
+  ]
 }
