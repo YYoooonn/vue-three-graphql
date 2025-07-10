@@ -1,0 +1,13 @@
+fragment LightFields on Light {
+  type
+  color
+  intensity
+  position {
+    ...Vector3Fields
+  }
+  distance
+  angle
+  target {
+    ...Vector3Fields
+  }
+}

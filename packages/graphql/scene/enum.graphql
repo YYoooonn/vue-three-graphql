@@ -1,0 +1,27 @@
+enum GeometryType {
+  BOX
+  SPHERE
+  CYLINDER
+  CONE
+  CUSTOM
+}
+
+enum MaterialType {
+  STANDARD
+  PHYSICAL
+  BASIC
+}
+
+enum LightType {
+  DIRECTIONAL
+  POINT
+  SPOT
+  AMBIENT
+}
+
+enum SceneObjectType {
+  MESH
+  LIGHT
+  CAMERA
+  GROUP
+}

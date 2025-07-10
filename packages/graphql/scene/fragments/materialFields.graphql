@@ -1,0 +1,8 @@
+fragment MaterialFields on Material {
+  type
+  color
+  roughness
+  metalness
+  transparent
+  opacity
+}

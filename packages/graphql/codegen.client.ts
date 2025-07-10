@@ -1,13 +1,14 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
 const config: CodegenConfig = {
-  schema: './schema.graphql',
-  documents: ['./operations/**/*.graphql', './fragments/**/*.graphql'],
+  schema: './**/*.graphql',
+  documents: ['./**/operations/**/*.graphql', './**/fragments/**/*.graphql'],
   generates: {
     './generated/client/index.ts': {
       plugins: ['typescript', 'typescript-operations', 'typescript-vue-apollo'],
       config: {
         useTypeImports: true,
+        fragmentMasking: true,
         withCompositionFunctions: true,
         vueCompositionApiImportFrom: 'vue',
         preResolveTypes: true,

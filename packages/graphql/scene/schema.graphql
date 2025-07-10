@@ -1,0 +1,15 @@
+input SceneInput {
+  prompt: String!
+}
+input SceneObjectInput {
+  prompt: String!
+}
+
+extend type Query {
+  getScene(id: ID!): Scene
+}
+
+extend type Mutation {
+  generateScene(input: SceneInput!): Scene!
+  generateSceneObject(input: SceneObjectInput!): SceneObject!
+}

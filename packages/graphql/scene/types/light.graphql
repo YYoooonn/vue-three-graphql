@@ -1,0 +1,16 @@
+type Light {
+  type: LightType!
+  color: String
+  intensity: Float
+  position: Vector3
+  distance: Float
+  angle: Float
+  target: Vector3
+}
+
+enum LightType {
+  AMBIENT
+  DIRECTIONAL
+  POINT
+  SPOT
+}

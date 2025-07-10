@@ -1,0 +1,8 @@
+fragment AnimationFields on Animation {
+  property
+  from
+  to
+  duration
+  delay
+  repeat
+}

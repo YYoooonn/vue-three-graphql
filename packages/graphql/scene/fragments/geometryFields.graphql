@@ -1,0 +1,9 @@
+fragment GeometryFields on Geometry {
+  type
+  params
+  vertices
+  indices
+  normals
+  uvs
+  colors
+}

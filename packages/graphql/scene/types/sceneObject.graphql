@@ -1,0 +1,21 @@
+type SceneObject {
+  id: ID!
+  name: String
+  type: SceneObjectType!
+  # mesh
+  geometry: Geometry
+  material: Material
+  # light
+  light: Light
+  # camera
+  camera: Camera
+
+  # common
+  # transform
+  position: Vector3
+  rotation: Vector3
+  scale: Vector3
+  animations: [Animation!]
+  count: Int
+  children: [SceneObject!]
+}

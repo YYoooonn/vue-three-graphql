@@ -1,0 +1,5 @@
+fragment Vector3Fields on Vector3 {
+  x
+  y
+  z
+}

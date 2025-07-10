@@ -1,0 +1,47 @@
+fragment SceneObjectFields on SceneObject {
+  id
+  geometry {
+    ...GeometryFields
+  }
+  material {
+    ...MaterialFields
+  }
+  position {
+    ...Vector3Fields
+  }
+  rotation {
+    ...Vector3Fields
+  }
+  scale {
+    ...Vector3Fields
+  }
+  count
+  animations {
+    ...AnimationFields
+  }
+  children {
+    id
+    geometry {
+      ...GeometryFields
+    }
+    material {
+      ...MaterialFields
+    }
+    position {
+      ...Vector3Fields
+    }
+    rotation {
+      ...Vector3Fields
+    }
+    scale {
+      ...Vector3Fields
+    }
+    count
+    animations {
+      ...AnimationFields
+    }
+    # children {
+    #   ...SceneObjectFields
+    # }
+  }
+}

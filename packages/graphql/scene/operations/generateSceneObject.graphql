@@ -1,0 +1,5 @@
+mutation GenerateSceneObject($input: SceneObjectInput!) {
+  generateSceneObject(input: $input) {
+    ...SceneObjectFields
+  }
+}

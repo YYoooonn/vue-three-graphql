@@ -1,0 +1,5 @@
+type Scene {
+  id: ID!
+  background: String
+  objects: [SceneObject!]!
+}

@@ -1,0 +1,12 @@
+type Camera {
+  type: CameraType!
+  fov: Float
+  near: Float
+  far: Float
+  zoom: Float
+}
+
+enum CameraType {
+  PERSPECTIVE
+  ORTHOGRAPHIC
+}

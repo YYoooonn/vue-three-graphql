@@ -1,0 +1,7 @@
+fragment CameraFields on Camera {
+  type
+  fov
+  near
+  far
+  zoom
+}

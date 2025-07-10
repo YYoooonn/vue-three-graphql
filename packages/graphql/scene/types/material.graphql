@@ -1,0 +1,8 @@
+type Material {
+  type: MaterialType!
+  color: String
+  roughness: Float
+  metalness: Float
+  transparent: Boolean
+  opacity: Float
+}

@@ -1,0 +1,9 @@
+type Geometry {
+  type: GeometryType!
+  params: JSON
+  vertices: [Float!]
+  indices: [Int!]
+  normals: [Float!]
+  uvs: [Float!]
+  colors: [Float!]
+}
