@@ -1,19 +1,19 @@
 import * as THREE from 'three'
 import { BACKGROUND_COLOR } from './color'
-
+import { SHADER_MATERIAL } from './materials'
 const TEST_ANIMATION_1 = [
   {
     property: 'rotation.y',
     from: 0,
-    to: Math.PI,
-    duration: 5000,
+    to: Math.PI * 2,
+    duration: 50000,
     repeat: -1,
   },
   {
     property: 'rotation.x',
     from: 0,
-    to: Math.PI,
-    duration: 5000,
+    to: Math.PI * 2,
+    duration: 50000,
     repeat: -1,
   },
 ]
@@ -22,8 +22,8 @@ const TEST_ANIMATION_2 = [
   {
     property: 'rotation.y',
     from: 0,
-    to: Math.PI,
-    duration: 5000,
+    to: Math.PI * 2,
+    duration: 10000,
     repeat: -1,
   },
 ]
@@ -39,11 +39,8 @@ const SAMPLE_LINE_MATERIAL = new THREE.LineBasicMaterial({ color: 0x000000 })
 export const SAMPLE_LINE = new THREE.Line(SAMPLE_LINE_GEOMETRY, SAMPLE_LINE_MATERIAL)
 SAMPLE_LINE.userData.animations = TEST_ANIMATION_2
 
-export const SAMPLE_CUBE = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshStandardMaterial({ color: 0x00aaff }),
-)
-SAMPLE_CUBE.userData.animations = TEST_ANIMATION_1
+export const SAMPLE_OBJECT = new THREE.Mesh(new THREE.IcosahedronGeometry(2, 30), SHADER_MATERIAL)
+SAMPLE_OBJECT.userData.animations = TEST_ANIMATION_1
 
 export const DEFAULT_SCENE = () => {
   const scene = new THREE.Scene()

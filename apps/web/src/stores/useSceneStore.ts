@@ -6,6 +6,7 @@ export const useSceneStore = defineStore('scene', {
     id: 'default', // Unique identifier for the scene
     background: '#f2f2f2', // Default background color
     objects: [] as SceneObjectFieldsFragment[],
+    isLoading: false,
   }),
   actions: {
     setScene(scene: SceneFieldsFragment) {
@@ -17,6 +18,11 @@ export const useSceneStore = defineStore('scene', {
       this.objects.push(object)
     },
     clearObjects() {
+      this.objects = []
+    },
+    clearScene() {
+      this.id = 'default'
+      this.background = '#f2f2f2'
       this.objects = []
     },
   },

@@ -13,6 +13,7 @@ import {
   dispose,
   setSceneBackground,
 } from '@/utils/three/sceneManager'
+import { uniforms } from '@/constants/materials'
 
 const container = ref<HTMLDivElement | null>(null)
 const sceneStore = useSceneStore()
@@ -23,7 +24,7 @@ function setupSceneWatcher() {
   watch(
     () => [...sceneStore.objects],
     (objects) => {
-      clearScene()
+      clearScene(!sceneStore.isLoading)
       setSceneBackground(sceneStore.background)
       for (const objData of objects) {
         addSceneObject(objData)
@@ -46,6 +47,13 @@ onMounted(() => {
     controls.update()
     renderer.render(scene, camera)
     animationId = requestAnimationFrame(animate)
+    uniforms.u_time.value += 0.005 // Update time uniform for animations
+    if (sceneStore.isLoading) {
+      uniforms.u_time.value += 0.02
+      if (uniforms.noise_scale.value < 50.0) uniforms.noise_scale.value += 0.01 // Increase noise scale when loading
+    } else {
+      uniforms.noise_scale.value = 2.0 // Reset noise scale when not loading
+    }
   }
   animate()
 

@@ -15,6 +15,7 @@ export function createSceneObject(sceneObject: SceneObjectFieldsFragment) {
     case 'LIGHT':
       // Handle light-specific logic
       obj = createLight(sceneObject)
+      if (obj) obj.castShadow = true
       break
     case 'CAMERA':
       // Handle camera-specific logic
@@ -30,6 +31,7 @@ export function createSceneObject(sceneObject: SceneObjectFieldsFragment) {
   }
   if (!obj) return null
 
+  obj.name = sceneObject.name || 'Unnamed Object'
   // animation
   if (sceneObject.animations) {
     obj.userData.animations = sceneObject.animations

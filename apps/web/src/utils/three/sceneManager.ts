@@ -7,9 +7,10 @@ import {
   DEFAULT_AMB_LIGHT,
   DEFAULT_DIR_LIGHT,
   DEFAULT_SCENE,
-  SAMPLE_CUBE,
+  SAMPLE_OBJECT,
   SAMPLE_LINE,
 } from '@/constants/three'
+import { fitCameraToObject } from './fitCameraToObject'
 // import { fitCameraToObject } from './fitCameraToObject'
 
 let scene: THREE.Scene
@@ -43,18 +44,26 @@ export function initScene(container: HTMLElement) {
   renderer.setSize(container.clientWidth, container.clientHeight)
 
   // default object
-  scene.add(SAMPLE_CUBE)
-  scene.add(SAMPLE_LINE)
-  objectMap.set(SAMPLE_CUBE.uuid, SAMPLE_CUBE)
-  objectMap.set(SAMPLE_LINE.uuid, SAMPLE_LINE)
+  scene.add(SAMPLE_OBJECT)
+  // scene.add(SAMPLE_LINE)
+  objectMap.set(SAMPLE_OBJECT.uuid, SAMPLE_OBJECT)
 
   // default light
   scene.add(DEFAULT_AMB_LIGHT)
   scene.add(DEFAULT_DIR_LIGHT)
-  objectMap.set(DEFAULT_AMB_LIGHT.uuid, DEFAULT_AMB_LIGHT)
-  objectMap.set(DEFAULT_DIR_LIGHT.uuid, DEFAULT_DIR_LIGHT)
 
   return { scene, renderer, camera, controls }
+}
+
+export function addDefaultObjects() {
+  if (!scene) return
+
+  if (!objectMap.has(SAMPLE_OBJECT.uuid)) {
+    scene.add(SAMPLE_OBJECT)
+    objectMap.set(SAMPLE_OBJECT.uuid, SAMPLE_OBJECT)
+
+    fitCameraToObject(camera, SAMPLE_OBJECT, controls)
+  }
 }
 
 export function setSceneBackground(color: string) {
@@ -79,6 +88,18 @@ export function addSceneObject(sceneObject: SceneObjectFieldsFragment) {
   const obj = createSceneObject(sceneObject)
   if (!obj) return
 
+  if (obj instanceof THREE.PerspectiveCamera) {
+    camera = obj
+    controls = new OrbitControls(camera, renderer.domElement)
+    controls.enableDamping = true
+    controls.dampingFactor = 0.25
+    controls.screenSpacePanning = false
+  }
+
+  if (sceneObject.name?.startsWith('MAIN_') && sceneObject.type === 'GROUP') {
+    fitCameraToObject(camera, obj, controls)
+  }
+
   scene.add(obj)
 
   objectMap.set(sceneObject.id, obj)
@@ -93,12 +114,14 @@ export function removeSceneObject(id: string) {
   }
 }
 
-export function clearScene() {
+export function clearScene(removeDefault = true) {
   if (!scene) return
   for (const obj of objectMap.values()) {
-    scene.remove(obj)
+    if (removeDefault || obj.uuid !== SAMPLE_OBJECT.uuid) {
+      scene.remove(obj)
+      objectMap.delete(obj.uuid)
+    }
   }
-  objectMap.clear()
 }
 
 export function dispose() {

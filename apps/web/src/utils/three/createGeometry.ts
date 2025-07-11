@@ -13,22 +13,18 @@ export function createGeometry(
 
   switch (type) {
     case 'BOX':
-      return new THREE.BoxGeometry(params?.width ?? 1, params?.height ?? 1, params?.depth ?? 1)
+      return new THREE.BoxGeometry(params?.[0] ?? 1, params?.[1] ?? 1, params?.[2] ?? 1)
 
     case 'CYLINDER':
       return new THREE.CylinderGeometry(
-        params?.radiusTop ?? 1,
-        params?.radiusBottom ?? 1,
-        params?.height ?? 1,
-        params?.radialSegments ?? 8,
+        params?.[0] ?? 1,
+        params?.[1] ?? 1,
+        params?.[2] ?? 1,
+        params?.[3] ?? 8,
       )
 
     case 'CONE':
-      return new THREE.ConeGeometry(
-        params?.radius ?? 1,
-        params?.height ?? 1,
-        params?.radialSegments ?? 8,
-      )
+      return new THREE.ConeGeometry(params?.[0] ?? 1, params?.[1] ?? 1, params?.[2] ?? 8)
 
     case 'CUSTOM':
       if (vertices) {
@@ -41,11 +37,7 @@ export function createGeometry(
       return customGeometry
 
     case 'SPHERE':
-      return new THREE.SphereGeometry(
-        params?.radius ?? 1,
-        params?.widthSegments ?? 32,
-        params?.heightSegments ?? 16,
-      )
+      return new THREE.SphereGeometry(params?.[0] ?? 1, params?.[1] ?? 32, params?.[2] ?? 16)
     default:
       console.warn(`Unknown geometry type: ${type}, falling back to BoxGeometry`)
       return DEFAULT_GEOMETRY
