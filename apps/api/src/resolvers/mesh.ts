@@ -7,14 +7,14 @@ const meshResolvers: Resolvers = {
       const keyword = input.prompt.toLowerCase()
 
       if (keyword.includes('에펠탑') || keyword.includes('eiffel')) {
-        return await loadFromMockFile('mesh/eiffel-tower.json')
+        return await loadFromMockFile('meshes/eiffel-tower.json')
       }
       if (keyword.includes('큐브') || keyword.includes('cube')) {
-        return await loadFromMockFile('mesh/cube.json')
+        return await loadFromMockFile('meshes/cube.json')
       }
 
       // fallback default
-      return await loadFromMockFile('mesh/default.json')
+      return await loadFromMockFile('meshes/default.json')
     },
   },
 }

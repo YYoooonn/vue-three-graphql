@@ -1,0 +1,255 @@
+{
+  "id": "joyfulScene_1",
+  "background": "#87CEEB",
+  "objects": [
+    {
+      "id": "ambientLight_1",
+      "name": "Soft Ambient Light",
+      "type": "LIGHT",
+      "light": {
+        "type": "AMBIENT",
+        "color": "#F0F8FF",
+        "intensity": 0.5
+      }
+    },
+    {
+      "id": "pointLight_1",
+      "name": "Main Joyful Light",
+      "type": "LIGHT",
+      "light": {
+        "type": "POINT",
+        "color": "#FFD700",
+        "intensity": 2.5,
+        "position": {
+          "x": 0,
+          "y": 5,
+          "z": 0
+        },
+        "distance": 50
+      },
+      "position": {
+        "x": 0,
+        "y": 5,
+        "z": 0
+      }
+    },
+    {
+      "id": "centralSphere_1",
+      "name": "Happiness Core",
+      "type": "MESH",
+      "geometry": {
+        "type": "SPHERE",
+        "params": [3, 32, 16]
+      },
+      "material": {
+        "type": "BASIC",
+        "color": "#FF69B4"
+      },
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "animations": [
+        {
+          "property": "scale.x",
+          "from": 1.0,
+          "to": 1.08,
+          "duration": 1500,
+          "delay": 0,
+          "repeat": -1
+        },
+        {
+          "property": "scale.y",
+          "from": 1.0,
+          "to": 1.08,
+          "duration": 1500,
+          "delay": 0,
+          "repeat": -1
+        },
+        {
+          "property": "scale.z",
+          "from": 1.0,
+          "to": 1.08,
+          "duration": 1500,
+          "delay": 0,
+          "repeat": -1
+        }
+      ]
+    },
+    {
+      "id": "bouncingSphere_1",
+      "name": "Bouncing Orb 1",
+      "type": "MESH",
+      "geometry": {
+        "type": "SPHERE",
+        "params": [1, 24, 12]
+      },
+      "material": {
+        "type": "STANDARD",
+        "color": "#FF4500",
+        "roughness": 0.4,
+        "metalness": 0.1
+      },
+      "position": {
+        "x": -5,
+        "y": 0,
+        "z": -3
+      },
+      "animations": [
+        {
+          "property": "position.y",
+          "from": 0.0,
+          "to": 3.0,
+          "duration": 1200,
+          "delay": 100,
+          "repeat": -1
+        },
+        {
+          "property": "rotation.y",
+          "from": 0.0,
+          "to": 6.28,
+          "duration": 3000,
+          "delay": 0,
+          "repeat": -1
+        }
+      ]
+    },
+    {
+      "id": "bouncingSphere_2",
+      "name": "Bouncing Orb 2",
+      "type": "MESH",
+      "geometry": {
+        "type": "SPHERE",
+        "params": [1.2, 24, 12]
+      },
+      "material": {
+        "type": "STANDARD",
+        "color": "#3CB371",
+        "roughness": 0.5,
+        "metalness": 0.2
+      },
+      "position": {
+        "x": 4,
+        "y": 0,
+        "z": -5
+      },
+      "animations": [
+        {
+          "property": "position.y",
+          "from": 0.0,
+          "to": 3.5,
+          "duration": 1350,
+          "delay": 300,
+          "repeat": -1
+        },
+        {
+          "property": "rotation.z",
+          "from": 0.0,
+          "to": 6.28,
+          "duration": 2800,
+          "delay": 0,
+          "repeat": -1
+        }
+      ]
+    },
+    {
+      "id": "bouncingSphere_3",
+      "name": "Bouncing Orb 3",
+      "type": "MESH",
+      "geometry": {
+        "type": "SPHERE",
+        "params": [0.9, 24, 12]
+      },
+      "material": {
+        "type": "PHYSICAL",
+        "color": "#4169E1",
+        "roughness": 0.3,
+        "metalness": 0.6
+      },
+      "position": {
+        "x": 6,
+        "y": 0,
+        "z": 1
+      },
+      "animations": [
+        {
+          "property": "position.y",
+          "from": 0.0,
+          "to": 2.8,
+          "duration": 1100,
+          "delay": 500,
+          "repeat": -1
+        },
+        {
+          "property": "rotation.x",
+          "from": 0.0,
+          "to": 6.28,
+          "duration": 3200,
+          "delay": 0,
+          "repeat": -1
+        }
+      ]
+    },
+    {
+      "id": "bouncingSphere_4",
+      "name": "Bouncing Orb 4",
+      "type": "MESH",
+      "geometry": {
+        "type": "SPHERE",
+        "params": [1.1, 24, 12]
+      },
+      "material": {
+        "type": "STANDARD",
+        "color": "#DAA520",
+        "roughness": 0.4,
+        "metalness": 0.3
+      },
+      "position": {
+        "x": -3,
+        "y": 0,
+        "z": 6
+      },
+      "animations": [
+        {
+          "property": "position.y",
+          "from": 0.0,
+          "to": 3.2,
+          "duration": 1250,
+          "delay": 0,
+          "repeat": -1
+        },
+        {
+          "property": "rotation.y",
+          "from": 0.0,
+          "to": 6.28,
+          "duration": 2900,
+          "delay": 0,
+          "repeat": -1
+        }
+      ]
+    },
+    {
+      "id": "camera_1",
+      "name": "Main Camera",
+      "type": "CAMERA",
+      "camera": {
+        "type": "PERSPECTIVE",
+        "fov": 75,
+        "near": 0.1,
+        "far": 1000,
+        "zoom": 1
+      },
+      "position": {
+        "x": 0,
+        "y": 5,
+        "z": 15
+      },
+      "rotation": {
+        "x": -0.3,
+        "y": 0,
+        "z": 0
+      }
+    }
+  ]
+}
