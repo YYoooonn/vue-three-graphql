@@ -1,11 +1,23 @@
 fragment SceneObjectFields on SceneObject {
   id
+  name
+  type
+  # mesh
   geometry {
     ...GeometryFields
   }
   material {
     ...MaterialFields
   }
+  # light
+  light {
+    ...LightFields
+  }
+  # camera
+  camera {
+    ...CameraFields
+  }
+
   position {
     ...Vector3Fields
   }
@@ -21,12 +33,24 @@ fragment SceneObjectFields on SceneObject {
   }
   children {
     id
+    name
+    type
+    # mesh
     geometry {
       ...GeometryFields
     }
     material {
       ...MaterialFields
     }
+    # light
+    light {
+      ...LightFields
+    }
+    # camera
+    camera {
+      ...CameraFields
+    }
+
     position {
       ...Vector3Fields
     }

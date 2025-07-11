@@ -19,3 +19,10 @@ type SceneObject {
   count: Int
   children: [SceneObject!]
 }
+
+enum SceneObjectType {
+  MESH
+  LIGHT
+  CAMERA
+  GROUP
+}

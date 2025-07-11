@@ -1,8 +1,8 @@
 type Animation {
-  property: String!     # 애니메이션 대상 프로퍼티 (예: "rotation.y")
-  from: Float!          # 시작 값
-  to: Float!            # 끝 값
-  duration: Int!        # 지속 시간 (ms 단위)
-  delay: Int            # optional: 지연 시간
-  repeat: Int           # optional: 반복 횟수 (-1 for infinite)
+  property: String! # 애니메이션 대상 프로퍼티 (예: "rotation.y")
+  from: Float! # 시작 값
+  to: Float! # 끝 값
+  duration: Int! # 지속 시간 (ms 단위)
+  delay: Int # optional: 지연 시간
+  repeat: Int # optional: 반복 횟수 (-1 for infinite)
 }

@@ -31,12 +31,6 @@ export type Animation = {
   to: Scalars['Float']['output']
 }
 
-export enum AnimationType {
-  Bounce = 'BOUNCE',
-  Rotate = 'ROTATE',
-  Spin = 'SPIN',
-}
-
 export type Camera = {
   __typename?: 'Camera'
   far?: Maybe<Scalars['Float']['output']>
@@ -282,7 +276,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Animation: ResolverTypeWrapper<Animation>
-  AnimationType: AnimationType
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>
   Camera: ResolverTypeWrapper<Camera>
   CameraType: CameraType

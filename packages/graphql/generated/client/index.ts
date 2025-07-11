@@ -33,8 +33,6 @@ export type Animation = {
   to: Scalars['Float']['output']
 }
 
-export type AnimationType = 'BOUNCE' | 'ROTATE' | 'SPIN'
-
 export type Camera = {
   __typename?: 'Camera'
   far?: Maybe<Scalars['Float']['output']>
@@ -332,6 +330,8 @@ export type SceneFieldsFragment = {
   objects: Array<{
     __typename?: 'SceneObject'
     id: string
+    name?: string | null
+    type: SceneObjectType
     count?: number | null
     geometry?: {
       __typename?: 'Geometry'
@@ -352,6 +352,24 @@ export type SceneFieldsFragment = {
       transparent?: boolean | null
       opacity?: number | null
     } | null
+    light?: {
+      __typename?: 'Light'
+      type: LightType
+      color?: string | null
+      intensity?: number | null
+      distance?: number | null
+      angle?: number | null
+      position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+      target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+    } | null
+    camera?: {
+      __typename?: 'Camera'
+      type: CameraType
+      fov?: number | null
+      near?: number | null
+      far?: number | null
+      zoom?: number | null
+    } | null
     position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
     rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
     scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -367,6 +385,8 @@ export type SceneFieldsFragment = {
     children?: Array<{
       __typename?: 'SceneObject'
       id: string
+      name?: string | null
+      type: SceneObjectType
       count?: number | null
       geometry?: {
         __typename?: 'Geometry'
@@ -387,6 +407,24 @@ export type SceneFieldsFragment = {
         transparent?: boolean | null
         opacity?: number | null
       } | null
+      light?: {
+        __typename?: 'Light'
+        type: LightType
+        color?: string | null
+        intensity?: number | null
+        distance?: number | null
+        angle?: number | null
+        position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+        target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+      } | null
+      camera?: {
+        __typename?: 'Camera'
+        type: CameraType
+        fov?: number | null
+        near?: number | null
+        far?: number | null
+        zoom?: number | null
+      } | null
       position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
       rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
       scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -406,6 +444,8 @@ export type SceneFieldsFragment = {
 export type SceneObjectFieldsFragment = {
   __typename?: 'SceneObject'
   id: string
+  name?: string | null
+  type: SceneObjectType
   count?: number | null
   geometry?: {
     __typename?: 'Geometry'
@@ -426,6 +466,24 @@ export type SceneObjectFieldsFragment = {
     transparent?: boolean | null
     opacity?: number | null
   } | null
+  light?: {
+    __typename?: 'Light'
+    type: LightType
+    color?: string | null
+    intensity?: number | null
+    distance?: number | null
+    angle?: number | null
+    position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+    target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+  } | null
+  camera?: {
+    __typename?: 'Camera'
+    type: CameraType
+    fov?: number | null
+    near?: number | null
+    far?: number | null
+    zoom?: number | null
+  } | null
   position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
   rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
   scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -441,6 +499,8 @@ export type SceneObjectFieldsFragment = {
   children?: Array<{
     __typename?: 'SceneObject'
     id: string
+    name?: string | null
+    type: SceneObjectType
     count?: number | null
     geometry?: {
       __typename?: 'Geometry'
@@ -460,6 +520,24 @@ export type SceneObjectFieldsFragment = {
       metalness?: number | null
       transparent?: boolean | null
       opacity?: number | null
+    } | null
+    light?: {
+      __typename?: 'Light'
+      type: LightType
+      color?: string | null
+      intensity?: number | null
+      distance?: number | null
+      angle?: number | null
+      position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+      target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+    } | null
+    camera?: {
+      __typename?: 'Camera'
+      type: CameraType
+      fov?: number | null
+      near?: number | null
+      far?: number | null
+      zoom?: number | null
     } | null
     position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
     rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -491,6 +569,8 @@ export type GenerateSceneMutation = {
     objects: Array<{
       __typename?: 'SceneObject'
       id: string
+      name?: string | null
+      type: SceneObjectType
       count?: number | null
       geometry?: {
         __typename?: 'Geometry'
@@ -511,6 +591,24 @@ export type GenerateSceneMutation = {
         transparent?: boolean | null
         opacity?: number | null
       } | null
+      light?: {
+        __typename?: 'Light'
+        type: LightType
+        color?: string | null
+        intensity?: number | null
+        distance?: number | null
+        angle?: number | null
+        position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+        target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+      } | null
+      camera?: {
+        __typename?: 'Camera'
+        type: CameraType
+        fov?: number | null
+        near?: number | null
+        far?: number | null
+        zoom?: number | null
+      } | null
       position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
       rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
       scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -526,6 +624,8 @@ export type GenerateSceneMutation = {
       children?: Array<{
         __typename?: 'SceneObject'
         id: string
+        name?: string | null
+        type: SceneObjectType
         count?: number | null
         geometry?: {
           __typename?: 'Geometry'
@@ -545,6 +645,24 @@ export type GenerateSceneMutation = {
           metalness?: number | null
           transparent?: boolean | null
           opacity?: number | null
+        } | null
+        light?: {
+          __typename?: 'Light'
+          type: LightType
+          color?: string | null
+          intensity?: number | null
+          distance?: number | null
+          angle?: number | null
+          position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+          target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+        } | null
+        camera?: {
+          __typename?: 'Camera'
+          type: CameraType
+          fov?: number | null
+          near?: number | null
+          far?: number | null
+          zoom?: number | null
         } | null
         position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
         rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -572,6 +690,8 @@ export type GenerateSceneObjectMutation = {
   generateSceneObject: {
     __typename?: 'SceneObject'
     id: string
+    name?: string | null
+    type: SceneObjectType
     count?: number | null
     geometry?: {
       __typename?: 'Geometry'
@@ -592,6 +712,24 @@ export type GenerateSceneObjectMutation = {
       transparent?: boolean | null
       opacity?: number | null
     } | null
+    light?: {
+      __typename?: 'Light'
+      type: LightType
+      color?: string | null
+      intensity?: number | null
+      distance?: number | null
+      angle?: number | null
+      position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+      target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+    } | null
+    camera?: {
+      __typename?: 'Camera'
+      type: CameraType
+      fov?: number | null
+      near?: number | null
+      far?: number | null
+      zoom?: number | null
+    } | null
     position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
     rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
     scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -607,6 +745,8 @@ export type GenerateSceneObjectMutation = {
     children?: Array<{
       __typename?: 'SceneObject'
       id: string
+      name?: string | null
+      type: SceneObjectType
       count?: number | null
       geometry?: {
         __typename?: 'Geometry'
@@ -626,6 +766,24 @@ export type GenerateSceneObjectMutation = {
         metalness?: number | null
         transparent?: boolean | null
         opacity?: number | null
+      } | null
+      light?: {
+        __typename?: 'Light'
+        type: LightType
+        color?: string | null
+        intensity?: number | null
+        distance?: number | null
+        angle?: number | null
+        position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+        target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+      } | null
+      camera?: {
+        __typename?: 'Camera'
+        type: CameraType
+        fov?: number | null
+        near?: number | null
+        far?: number | null
+        zoom?: number | null
       } | null
       position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
       rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -656,6 +814,8 @@ export type GetSceneQuery = {
     objects: Array<{
       __typename?: 'SceneObject'
       id: string
+      name?: string | null
+      type: SceneObjectType
       count?: number | null
       geometry?: {
         __typename?: 'Geometry'
@@ -676,6 +836,24 @@ export type GetSceneQuery = {
         transparent?: boolean | null
         opacity?: number | null
       } | null
+      light?: {
+        __typename?: 'Light'
+        type: LightType
+        color?: string | null
+        intensity?: number | null
+        distance?: number | null
+        angle?: number | null
+        position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+        target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+      } | null
+      camera?: {
+        __typename?: 'Camera'
+        type: CameraType
+        fov?: number | null
+        near?: number | null
+        far?: number | null
+        zoom?: number | null
+      } | null
       position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
       rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
       scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -691,6 +869,8 @@ export type GetSceneQuery = {
       children?: Array<{
         __typename?: 'SceneObject'
         id: string
+        name?: string | null
+        type: SceneObjectType
         count?: number | null
         geometry?: {
           __typename?: 'Geometry'
@@ -710,6 +890,24 @@ export type GetSceneQuery = {
           metalness?: number | null
           transparent?: boolean | null
           opacity?: number | null
+        } | null
+        light?: {
+          __typename?: 'Light'
+          type: LightType
+          color?: string | null
+          intensity?: number | null
+          distance?: number | null
+          angle?: number | null
+          position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+          target?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
+        } | null
+        camera?: {
+          __typename?: 'Camera'
+          type: CameraType
+          fov?: number | null
+          near?: number | null
+          far?: number | null
+          zoom?: number | null
         } | null
         position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
         rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
@@ -792,13 +990,25 @@ export const MeshObjectFieldsFragmentDoc = gql`
     }
   }
 `
-export const CameraFieldsFragmentDoc = gql`
-  fragment CameraFields on Camera {
+export const GeometryFieldsFragmentDoc = gql`
+  fragment GeometryFields on Geometry {
     type
-    fov
-    near
-    far
-    zoom
+    params
+    vertices
+    indices
+    normals
+    uvs
+    colors
+  }
+`
+export const MaterialFieldsFragmentDoc = gql`
+  fragment MaterialFields on Material {
+    type
+    color
+    roughness
+    metalness
+    transparent
+    opacity
   }
 `
 export const Vector3FieldsFragmentDoc = gql`
@@ -824,25 +1034,13 @@ export const LightFieldsFragmentDoc = gql`
   }
   ${Vector3FieldsFragmentDoc}
 `
-export const GeometryFieldsFragmentDoc = gql`
-  fragment GeometryFields on Geometry {
+export const CameraFieldsFragmentDoc = gql`
+  fragment CameraFields on Camera {
     type
-    params
-    vertices
-    indices
-    normals
-    uvs
-    colors
-  }
-`
-export const MaterialFieldsFragmentDoc = gql`
-  fragment MaterialFields on Material {
-    type
-    color
-    roughness
-    metalness
-    transparent
-    opacity
+    fov
+    near
+    far
+    zoom
   }
 `
 export const AnimationFieldsFragmentDoc = gql`
@@ -858,11 +1056,19 @@ export const AnimationFieldsFragmentDoc = gql`
 export const SceneObjectFieldsFragmentDoc = gql`
   fragment SceneObjectFields on SceneObject {
     id
+    name
+    type
     geometry {
       ...GeometryFields
     }
     material {
       ...MaterialFields
+    }
+    light {
+      ...LightFields
+    }
+    camera {
+      ...CameraFields
     }
     position {
       ...Vector3Fields
@@ -879,11 +1085,19 @@ export const SceneObjectFieldsFragmentDoc = gql`
     }
     children {
       id
+      name
+      type
       geometry {
         ...GeometryFields
       }
       material {
         ...MaterialFields
+      }
+      light {
+        ...LightFields
+      }
+      camera {
+        ...CameraFields
       }
       position {
         ...Vector3Fields
@@ -902,6 +1116,8 @@ export const SceneObjectFieldsFragmentDoc = gql`
   }
   ${GeometryFieldsFragmentDoc}
   ${MaterialFieldsFragmentDoc}
+  ${LightFieldsFragmentDoc}
+  ${CameraFieldsFragmentDoc}
   ${Vector3FieldsFragmentDoc}
   ${AnimationFieldsFragmentDoc}
 `
