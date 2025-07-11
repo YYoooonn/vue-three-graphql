@@ -49,23 +49,13 @@ export type Geometry = {
   colors?: Maybe<Array<Scalars['Float']['output']>>
   indices?: Maybe<Array<Scalars['Int']['output']>>
   normals?: Maybe<Array<Scalars['Float']['output']>>
-  params?: Maybe<Scalars['JSON']['output']>
+  params?: Maybe<Array<Scalars['Float']['output']>>
   type: GeometryType
   uvs?: Maybe<Array<Scalars['Float']['output']>>
   vertices?: Maybe<Array<Scalars['Float']['output']>>
 }
 
-export type GeometryType =
-  | 'BOX'
-  | 'CONE'
-  | 'CUSTOM'
-  | 'CYLINDER'
-  | 'SPHERE'
-  | 'box'
-  | 'cone'
-  | 'custom'
-  | 'cylinder'
-  | 'sphere'
+export type GeometryType = 'BOX' | 'CONE' | 'CUSTOM' | 'CYLINDER' | 'SPHERE'
 
 export type Light = {
   __typename?: 'Light'
@@ -86,34 +76,16 @@ export type Material = {
   metalness?: Maybe<Scalars['Float']['output']>
   opacity?: Maybe<Scalars['Float']['output']>
   roughness?: Maybe<Scalars['Float']['output']>
-  textureUrl?: Maybe<Scalars['String']['output']>
   transparent?: Maybe<Scalars['Boolean']['output']>
   type: MaterialType
 }
 
 export type MaterialType = 'BASIC' | 'PHYSICAL' | 'STANDARD'
 
-export type MeshObject = {
-  __typename?: 'MeshObject'
-  children?: Maybe<Array<MeshObject>>
-  geometry: Geometry
-  id: Scalars['ID']['output']
-  material: Material
-  name?: Maybe<Scalars['String']['output']>
-  position?: Maybe<Vector3>
-  rotation?: Maybe<Vector3>
-  scale?: Maybe<Vector3>
-}
-
 export type Mutation = {
   __typename?: 'Mutation'
-  generateMesh: MeshObject
   generateScene: Scene
   generateSceneObject: SceneObject
-}
-
-export type MutationGenerateMeshArgs = {
-  prompt: Scalars['String']['input']
 }
 
 export type MutationGenerateSceneArgs = {
@@ -126,7 +98,6 @@ export type MutationGenerateSceneObjectArgs = {
 
 export type Query = {
   __typename?: 'Query'
-  _empty?: Maybe<Scalars['String']['output']>
   getScene?: Maybe<Scene>
 }
 
@@ -175,103 +146,6 @@ export type Vector3 = {
   z: Scalars['Float']['output']
 }
 
-export type MeshObjectFieldsFragment = {
-  __typename?: 'MeshObject'
-  id: string
-  name?: string | null
-  position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-  rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-  scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-  geometry: {
-    __typename?: 'Geometry'
-    type: GeometryType
-    params?: Record<string, any> | null
-    vertices?: Array<number> | null
-    indices?: Array<number> | null
-  }
-  material: {
-    __typename?: 'Material'
-    color?: string | null
-    metalness?: number | null
-    roughness?: number | null
-    textureUrl?: string | null
-  }
-  children?: Array<{
-    __typename?: 'MeshObject'
-    id: string
-    name?: string | null
-    position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-    rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-    scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-    geometry: {
-      __typename?: 'Geometry'
-      type: GeometryType
-      params?: Record<string, any> | null
-      vertices?: Array<number> | null
-      indices?: Array<number> | null
-    }
-    material: {
-      __typename?: 'Material'
-      color?: string | null
-      metalness?: number | null
-      roughness?: number | null
-      textureUrl?: string | null
-    }
-  }> | null
-}
-
-export type GenerateMeshMutationVariables = Exact<{
-  prompt: Scalars['String']['input']
-}>
-
-export type GenerateMeshMutation = {
-  __typename?: 'Mutation'
-  generateMesh: {
-    __typename?: 'MeshObject'
-    id: string
-    name?: string | null
-    position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-    rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-    scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-    geometry: {
-      __typename?: 'Geometry'
-      type: GeometryType
-      params?: Record<string, any> | null
-      vertices?: Array<number> | null
-      indices?: Array<number> | null
-    }
-    material: {
-      __typename?: 'Material'
-      color?: string | null
-      metalness?: number | null
-      roughness?: number | null
-      textureUrl?: string | null
-    }
-    children?: Array<{
-      __typename?: 'MeshObject'
-      id: string
-      name?: string | null
-      position?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-      rotation?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-      scale?: { __typename?: 'Vector3'; x: number; y: number; z: number } | null
-      geometry: {
-        __typename?: 'Geometry'
-        type: GeometryType
-        params?: Record<string, any> | null
-        vertices?: Array<number> | null
-        indices?: Array<number> | null
-      }
-      material: {
-        __typename?: 'Material'
-        color?: string | null
-        metalness?: number | null
-        roughness?: number | null
-        textureUrl?: string | null
-      }
-    }> | null
-  }
-}
-
 export type AnimationFieldsFragment = {
   __typename?: 'Animation'
   property: string
@@ -294,7 +168,7 @@ export type CameraFieldsFragment = {
 export type GeometryFieldsFragment = {
   __typename?: 'Geometry'
   type: GeometryType
-  params?: Record<string, any> | null
+  params?: Array<number> | null
   vertices?: Array<number> | null
   indices?: Array<number> | null
   normals?: Array<number> | null
@@ -336,7 +210,7 @@ export type SceneFieldsFragment = {
     geometry?: {
       __typename?: 'Geometry'
       type: GeometryType
-      params?: Record<string, any> | null
+      params?: Array<number> | null
       vertices?: Array<number> | null
       indices?: Array<number> | null
       normals?: Array<number> | null
@@ -391,7 +265,7 @@ export type SceneFieldsFragment = {
       geometry?: {
         __typename?: 'Geometry'
         type: GeometryType
-        params?: Record<string, any> | null
+        params?: Array<number> | null
         vertices?: Array<number> | null
         indices?: Array<number> | null
         normals?: Array<number> | null
@@ -450,7 +324,7 @@ export type SceneObjectFieldsFragment = {
   geometry?: {
     __typename?: 'Geometry'
     type: GeometryType
-    params?: Record<string, any> | null
+    params?: Array<number> | null
     vertices?: Array<number> | null
     indices?: Array<number> | null
     normals?: Array<number> | null
@@ -505,7 +379,7 @@ export type SceneObjectFieldsFragment = {
     geometry?: {
       __typename?: 'Geometry'
       type: GeometryType
-      params?: Record<string, any> | null
+      params?: Array<number> | null
       vertices?: Array<number> | null
       indices?: Array<number> | null
       normals?: Array<number> | null
@@ -575,7 +449,7 @@ export type GenerateSceneMutation = {
       geometry?: {
         __typename?: 'Geometry'
         type: GeometryType
-        params?: Record<string, any> | null
+        params?: Array<number> | null
         vertices?: Array<number> | null
         indices?: Array<number> | null
         normals?: Array<number> | null
@@ -630,7 +504,7 @@ export type GenerateSceneMutation = {
         geometry?: {
           __typename?: 'Geometry'
           type: GeometryType
-          params?: Record<string, any> | null
+          params?: Array<number> | null
           vertices?: Array<number> | null
           indices?: Array<number> | null
           normals?: Array<number> | null
@@ -696,7 +570,7 @@ export type GenerateSceneObjectMutation = {
     geometry?: {
       __typename?: 'Geometry'
       type: GeometryType
-      params?: Record<string, any> | null
+      params?: Array<number> | null
       vertices?: Array<number> | null
       indices?: Array<number> | null
       normals?: Array<number> | null
@@ -751,7 +625,7 @@ export type GenerateSceneObjectMutation = {
       geometry?: {
         __typename?: 'Geometry'
         type: GeometryType
-        params?: Record<string, any> | null
+        params?: Array<number> | null
         vertices?: Array<number> | null
         indices?: Array<number> | null
         normals?: Array<number> | null
@@ -820,7 +694,7 @@ export type GetSceneQuery = {
       geometry?: {
         __typename?: 'Geometry'
         type: GeometryType
-        params?: Record<string, any> | null
+        params?: Array<number> | null
         vertices?: Array<number> | null
         indices?: Array<number> | null
         normals?: Array<number> | null
@@ -875,7 +749,7 @@ export type GetSceneQuery = {
         geometry?: {
           __typename?: 'Geometry'
           type: GeometryType
-          params?: Record<string, any> | null
+          params?: Array<number> | null
           vertices?: Array<number> | null
           indices?: Array<number> | null
           normals?: Array<number> | null
@@ -926,70 +800,6 @@ export type GetSceneQuery = {
   } | null
 }
 
-export const MeshObjectFieldsFragmentDoc = gql`
-  fragment MeshObjectFields on MeshObject {
-    id
-    name
-    position {
-      x
-      y
-      z
-    }
-    rotation {
-      x
-      y
-      z
-    }
-    scale {
-      x
-      y
-      z
-    }
-    geometry {
-      type
-      params
-      vertices
-      indices
-    }
-    material {
-      color
-      metalness
-      roughness
-      textureUrl
-    }
-    children {
-      id
-      name
-      position {
-        x
-        y
-        z
-      }
-      rotation {
-        x
-        y
-        z
-      }
-      scale {
-        x
-        y
-        z
-      }
-      geometry {
-        type
-        params
-        vertices
-        indices
-      }
-      material {
-        color
-        metalness
-        roughness
-        textureUrl
-      }
-    }
-  }
-`
 export const GeometryFieldsFragmentDoc = gql`
   fragment GeometryFields on Geometry {
     type
@@ -1131,48 +941,6 @@ export const SceneFieldsFragmentDoc = gql`
   }
   ${SceneObjectFieldsFragmentDoc}
 `
-export const GenerateMeshDocument = gql`
-  mutation GenerateMesh($prompt: String!) {
-    generateMesh(prompt: $prompt) {
-      ...MeshObjectFields
-    }
-  }
-  ${MeshObjectFieldsFragmentDoc}
-`
-
-/**
- * __useGenerateMeshMutation__
- *
- * To run a mutation, you first call `useGenerateMeshMutation` within a Vue component and pass it any options that fit your needs.
- * When your component renders, `useGenerateMeshMutation` returns an object that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
- *
- * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
- *
- * @example
- * const { mutate, loading, error, onDone } = useGenerateMeshMutation({
- *   variables: {
- *     prompt: // value for 'prompt'
- *   },
- * });
- */
-export function useGenerateMeshMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<GenerateMeshMutation, GenerateMeshMutationVariables>
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<GenerateMeshMutation, GenerateMeshMutationVariables>
-      > = {},
-) {
-  return VueApolloComposable.useMutation<GenerateMeshMutation, GenerateMeshMutationVariables>(
-    GenerateMeshDocument,
-    options,
-  )
-}
-export type GenerateMeshMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<
-  GenerateMeshMutation,
-  GenerateMeshMutationVariables
->
 export const GenerateSceneDocument = gql`
   mutation GenerateScene($input: SceneInput!) {
     generateScene(input: $input) {

@@ -1,5 +1,0 @@
-mutation GenerateMesh($prompt: String!) {
-  generateMesh(prompt: $prompt) {
-    ...MeshObjectFields
-  }
-}

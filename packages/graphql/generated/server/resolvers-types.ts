@@ -50,7 +50,7 @@ export type Geometry = {
   colors?: Maybe<Array<Scalars['Float']['output']>>
   indices?: Maybe<Array<Scalars['Int']['output']>>
   normals?: Maybe<Array<Scalars['Float']['output']>>
-  params?: Maybe<Scalars['JSON']['output']>
+  params?: Maybe<Array<Scalars['Float']['output']>>
   type: GeometryType
   uvs?: Maybe<Array<Scalars['Float']['output']>>
   vertices?: Maybe<Array<Scalars['Float']['output']>>
@@ -62,11 +62,6 @@ export enum GeometryType {
   Custom = 'CUSTOM',
   Cylinder = 'CYLINDER',
   Sphere = 'SPHERE',
-  Box = 'box',
-  Cone = 'cone',
-  Custom = 'custom',
-  Cylinder = 'cylinder',
-  Sphere = 'sphere',
 }
 
 export type Light = {
@@ -93,7 +88,6 @@ export type Material = {
   metalness?: Maybe<Scalars['Float']['output']>
   opacity?: Maybe<Scalars['Float']['output']>
   roughness?: Maybe<Scalars['Float']['output']>
-  textureUrl?: Maybe<Scalars['String']['output']>
   transparent?: Maybe<Scalars['Boolean']['output']>
   type: MaterialType
 }
@@ -104,27 +98,10 @@ export enum MaterialType {
   Standard = 'STANDARD',
 }
 
-export type MeshObject = {
-  __typename?: 'MeshObject'
-  children?: Maybe<Array<MeshObject>>
-  geometry: Geometry
-  id: Scalars['ID']['output']
-  material: Material
-  name?: Maybe<Scalars['String']['output']>
-  position?: Maybe<Vector3>
-  rotation?: Maybe<Vector3>
-  scale?: Maybe<Vector3>
-}
-
 export type Mutation = {
   __typename?: 'Mutation'
-  generateMesh: MeshObject
   generateScene: Scene
   generateSceneObject: SceneObject
-}
-
-export type MutationGenerateMeshArgs = {
-  prompt: Scalars['String']['input']
 }
 
 export type MutationGenerateSceneArgs = {
@@ -137,7 +114,6 @@ export type MutationGenerateSceneObjectArgs = {
 
 export type Query = {
   __typename?: 'Query'
-  _empty?: Maybe<Scalars['String']['output']>
   getScene?: Maybe<Scene>
 }
 
@@ -289,7 +265,6 @@ export type ResolversTypes = {
   LightType: LightType
   Material: ResolverTypeWrapper<Material>
   MaterialType: MaterialType
-  MeshObject: ResolverTypeWrapper<MeshObject>
   Mutation: ResolverTypeWrapper<{}>
   Query: ResolverTypeWrapper<{}>
   Scene: ResolverTypeWrapper<Scene>
@@ -313,7 +288,6 @@ export type ResolversParentTypes = {
   JSON: Scalars['JSON']['output']
   Light: Light
   Material: Material
-  MeshObject: MeshObject
   Mutation: {}
   Query: {}
   Scene: Scene
@@ -356,7 +330,7 @@ export type GeometryResolvers<
   colors?: Resolver<Maybe<Array<ResolversTypes['Float']>>, ParentType, ContextType>
   indices?: Resolver<Maybe<Array<ResolversTypes['Int']>>, ParentType, ContextType>
   normals?: Resolver<Maybe<Array<ResolversTypes['Float']>>, ParentType, ContextType>
-  params?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>
+  params?: Resolver<Maybe<Array<ResolversTypes['Float']>>, ParentType, ContextType>
   type?: Resolver<ResolversTypes['GeometryType'], ParentType, ContextType>
   uvs?: Resolver<Maybe<Array<ResolversTypes['Float']>>, ParentType, ContextType>
   vertices?: Resolver<Maybe<Array<ResolversTypes['Float']>>, ParentType, ContextType>
@@ -389,24 +363,8 @@ export type MaterialResolvers<
   metalness?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
   opacity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
   roughness?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
-  textureUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   transparent?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>
   type?: Resolver<ResolversTypes['MaterialType'], ParentType, ContextType>
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
-}
-
-export type MeshObjectResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['MeshObject'] = ResolversParentTypes['MeshObject'],
-> = {
-  children?: Resolver<Maybe<Array<ResolversTypes['MeshObject']>>, ParentType, ContextType>
-  geometry?: Resolver<ResolversTypes['Geometry'], ParentType, ContextType>
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
-  material?: Resolver<ResolversTypes['Material'], ParentType, ContextType>
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  position?: Resolver<Maybe<ResolversTypes['Vector3']>, ParentType, ContextType>
-  rotation?: Resolver<Maybe<ResolversTypes['Vector3']>, ParentType, ContextType>
-  scale?: Resolver<Maybe<ResolversTypes['Vector3']>, ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -414,12 +372,6 @@ export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
-  generateMesh?: Resolver<
-    ResolversTypes['MeshObject'],
-    ParentType,
-    ContextType,
-    RequireFields<MutationGenerateMeshArgs, 'prompt'>
-  >
   generateScene?: Resolver<
     ResolversTypes['Scene'],
     ParentType,
@@ -438,7 +390,6 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
-  _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   getScene?: Resolver<
     Maybe<ResolversTypes['Scene']>,
     ParentType,
@@ -494,7 +445,6 @@ export type Resolvers<ContextType = any> = {
   JSON?: GraphQLScalarType
   Light?: LightResolvers<ContextType>
   Material?: MaterialResolvers<ContextType>
-  MeshObject?: MeshObjectResolvers<ContextType>
   Mutation?: MutationResolvers<ContextType>
   Query?: QueryResolvers<ContextType>
   Scene?: SceneResolvers<ContextType>

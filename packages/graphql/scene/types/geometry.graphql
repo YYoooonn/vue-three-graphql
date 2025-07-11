@@ -1,6 +1,6 @@
 type Geometry {
   type: GeometryType!
-  params: JSON
+  params: [Float!]
   vertices: [Float!]
   indices: [Int!]
   normals: [Float!]
