@@ -1,21 +1,27 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { createMeshFromObject } from './createMeshFromObject'
-import type { MeshObjectFieldsFragment } from '@packages/graphql/client'
-import { BACKGROUND_COLOR } from '@/constants/color'
-import { fitCameraToObject } from './fitCameraToObject'
+import type { SceneObjectFieldsFragment } from '@packages/graphql/client'
+import { createSceneObject } from './createSceneObject'
+import { applyAnimationsRecursive } from './animationUtils'
+import {
+  DEFAULT_AMB_LIGHT,
+  DEFAULT_DIR_LIGHT,
+  DEFAULT_SCENE,
+  SAMPLE_CUBE,
+  SAMPLE_LINE,
+} from '@/constants/three'
+// import { fitCameraToObject } from './fitCameraToObject'
 
 let scene: THREE.Scene
 let renderer: THREE.WebGLRenderer
 let camera: THREE.PerspectiveCamera
 let controls: OrbitControls
-const meshMap = new Map<string, THREE.Object3D>()
+const objectMap = new Map<string, THREE.Object3D>()
 
 export function initScene(container: HTMLElement) {
   // renderer 설정
   renderer = new THREE.WebGLRenderer({ antialias: true })
-  scene = new THREE.Scene()
-  scene.background = new THREE.Color(BACKGROUND_COLOR)
+  scene = DEFAULT_SCENE()
 
   renderer.setSize(container.clientWidth, container.clientHeight)
   container.appendChild(renderer.domElement)
@@ -27,63 +33,75 @@ export function initScene(container: HTMLElement) {
     0.1,
     1000,
   )
-  controls = new OrbitControls(camera, renderer.domElement)
-
   camera.position.set(0, 5, 15)
+
+  controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
   controls.dampingFactor = 0.25
   controls.screenSpacePanning = false
 
-  const ambientLight = new THREE.AmbientLight(0x404040, 2)
-  scene.add(ambientLight)
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
-  directionalLight.position.set(0, 1, 1).normalize()
-  scene.add(directionalLight)
-
   renderer.setSize(container.clientWidth, container.clientHeight)
 
+  // default object
+  scene.add(SAMPLE_CUBE)
+  scene.add(SAMPLE_LINE)
+  objectMap.set(SAMPLE_CUBE.uuid, SAMPLE_CUBE)
+  objectMap.set(SAMPLE_LINE.uuid, SAMPLE_LINE)
+
+  // default light
+  scene.add(DEFAULT_AMB_LIGHT)
+  scene.add(DEFAULT_DIR_LIGHT)
+  objectMap.set(DEFAULT_AMB_LIGHT.uuid, DEFAULT_AMB_LIGHT)
+  objectMap.set(DEFAULT_DIR_LIGHT.uuid, DEFAULT_DIR_LIGHT)
+
   return { scene, renderer, camera, controls }
+}
+
+export function setSceneBackground(color: string) {
+  if (!scene) return
+  scene.background = new THREE.Color(color)
 }
 
 export function getScene() {
   return scene
 }
 
-export function addMesh(meshData: MeshObjectFieldsFragment) {
+export function addSceneObject(sceneObject: SceneObjectFieldsFragment) {
   if (!scene) return
 
   // 이미 있으면 제거 후 재등록
-  if (meshMap.has(meshData.id)) {
-    const existing = meshMap.get(meshData.id)!
+  if (objectMap.has(sceneObject.id)) {
+    const existing = objectMap.get(sceneObject.id)!
     scene.remove(existing)
-    meshMap.delete(meshData.id)
+    objectMap.delete(sceneObject.id)
   }
 
-  const mesh = createMeshFromObject(meshData)
-  scene.add(mesh)
-  meshMap.set(meshData.id, mesh)
-  fitCameraToObject(camera, mesh, controls)
+  const obj = createSceneObject(sceneObject)
+  if (!obj) return
+
+  scene.add(obj)
+
+  objectMap.set(sceneObject.id, obj)
 }
 
-export function removeMesh(id: string) {
+export function removeSceneObject(id: string) {
   if (!scene) return
-  const mesh = meshMap.get(id)
+  const mesh = objectMap.get(id)
   if (mesh) {
     scene.remove(mesh)
-    meshMap.delete(id)
+    objectMap.delete(id)
   }
 }
 
 export function clearScene() {
   if (!scene) return
-  for (const mesh of meshMap.values()) {
-    scene.remove(mesh)
+  for (const obj of objectMap.values()) {
+    scene.remove(obj)
   }
-  meshMap.clear()
+  objectMap.clear()
 }
 
-export function disponse() {
+export function dispose() {
   if (renderer) {
     renderer.dispose()
   }
@@ -93,6 +111,28 @@ export function disponse() {
   if (controls) {
     controls.dispose()
   }
-  meshMap.clear()
+  objectMap.clear()
   // console.log('Scene and resources disposed')
 }
+
+export function updateAnimations(delta = 16.67) {
+  for (const obj of objectMap.values()) {
+    applyAnimationsRecursive(obj, delta)
+  }
+}
+
+// export function addMesh(meshData: MeshObjectFieldsFragment) {
+//   if (!scene) return
+
+//   // 이미 있으면 제거 후 재등록
+//   if (meshMap.has(meshData.id)) {
+//     const existing = meshMap.get(meshData.id)!
+//     scene.remove(existing)
+//     meshMap.delete(meshData.id)
+//   }
+
+//   const mesh = createMeshFromObject(meshData)
+//   scene.add(mesh)
+//   meshMap.set(meshData.id, mesh)
+//   fitCameraToObject(camera, mesh, controls)
+// }

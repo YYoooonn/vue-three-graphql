@@ -14,17 +14,19 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useGenerateMesh } from '@/graphql/hooks/useGenerateMesh'
-import { useMeshStore } from '@/stores/useMeshStore'
+import { useGenerateScene } from '@/graphql/hooks/useGenerateScene'
+import { useSceneStore } from '@/stores/useSceneStore'
 
 const prompt = ref('')
-const { mutate, onDone, onError } = useGenerateMesh()
-const meshStore = useMeshStore()
+const { mutate, onDone, onError } = useGenerateScene()
+const sceneStore = useSceneStore()
 
 onDone(({ data }) => {
-  if (data?.generateMesh) {
-    console.log('Generated Mesh:', data.generateMesh)
-    meshStore.addMesh(data.generateMesh)
+  if (data?.generateScene) {
+    sceneStore.setScene(data.generateScene)
+    // for (const obj of data.generateScene.objects) {
+    //   sceneStore.addObjects(obj)
+    // }
   }
 })
 
@@ -35,8 +37,8 @@ onError((err) => {
 function handleSubmit() {
   if (!prompt.value) return
 
-  meshStore.clearMeshes()
-  mutate({ prompt: prompt.value })
+  sceneStore.clearObjects()
+  mutate({ input: { prompt: prompt.value } })
 }
 </script>
 

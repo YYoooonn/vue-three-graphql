@@ -4,25 +4,31 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useResizeHandler } from '@/composables/useResizeHandler'
-import { useMeshStore } from '@/stores/useMeshStore'
-import { initScene, addMesh, clearScene, disponse } from '@/utils/three/sceneManager'
-import { addTestObjects } from '@/utils/three/test'
+import { useSceneStore } from '@/stores/useSceneStore'
+import {
+  initScene,
+  addSceneObject,
+  clearScene,
+  updateAnimations,
+  dispose,
+  setSceneBackground,
+} from '@/utils/three/sceneManager'
 
 const container = ref<HTMLDivElement | null>(null)
-const meshStore = useMeshStore()
+const sceneStore = useSceneStore()
 
 let animationId: number
 
-function setupMeshWatcher() {
+function setupSceneWatcher() {
   watch(
-    () => meshStore.meshes,
-    (meshes) => {
+    () => [...sceneStore.objects],
+    (objects) => {
       clearScene()
-      for (const meshData of meshes) {
-        addMesh(meshData)
+      setSceneBackground(sceneStore.background)
+      for (const objData of objects) {
+        addSceneObject(objData)
       }
     },
-    { deep: true },
   )
 }
 
@@ -33,15 +39,10 @@ onMounted(() => {
 
   const removeResizeHandler = useResizeHandler(container.value, camera, renderer)
 
-  const { cube, sampleLine } = addTestObjects(scene)
-  setupMeshWatcher()
+  setupSceneWatcher()
 
   const animate = () => {
-    cube.rotation.x += 0.01
-    cube.rotation.y += 0.01
-
-    sampleLine.rotation.y -= 0.01
-
+    updateAnimations()
     controls.update()
     renderer.render(scene, camera)
     animationId = requestAnimationFrame(animate)
@@ -51,7 +52,7 @@ onMounted(() => {
   onUnmounted(() => {
     cancelAnimationFrame(animationId)
     removeResizeHandler()
-    disponse()
+    dispose()
   })
 })
 </script>
